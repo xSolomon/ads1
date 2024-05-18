@@ -77,7 +77,7 @@ class LinkedListDeleteFirstOccuredValTests(unittest.TestCase):
             self.assertTrue(reduce(lambda x, y : x and (y.value == val), val_list, True))
 
 class LinkedListDeleteAllOccuredValTests(unittest.TestCase):
-    ''' Tests for LinkedList delete() function, with flag all=false. '''
+    ''' Tests for LinkedList delete() function, with flag all=true. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
         self.test_list : LinkedList = LinkedList()
@@ -168,7 +168,7 @@ class LinkedListDeleteAllOccuredValTests(unittest.TestCase):
         self.assertEqual(val_list, [])
 
 class LinkedListCleanTests(unittest.TestCase):
-    ''' Tests LinkedList clean function. '''
+    ''' Tests LinkedList clean() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
         self.test_list : LinkedList = LinkedList()
@@ -185,6 +185,9 @@ class LinkedListCleanTests(unittest.TestCase):
     def check(self) -> None:
         ''' Checks list state after clean().
             Tail and Head must be None, and list length is 0. '''
+        self.assertEqual(self.test_list.len(), 0)
+        self.assertIsNone(self.test_list.head)
+        self.assertIsNone(self.test_list.tail)
 
     def test_empty_list(self) -> None:
         ''' Tests cleaning empty list. '''
@@ -205,14 +208,14 @@ class LinkedListCleanTests(unittest.TestCase):
         self.check()
 
 class LinkedListFindAllTests(unittest.TestCase):
-    ''' Tests LinkedList FindAll() function. '''
+    ''' Tests LinkedList find_all() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
         self.test_list : LinkedList = LinkedList()
         self.test_list_len : int = 0
         self.test_list_head : Node = None
         self.test_list_tail : Node = None
-        self.result_list : Node = []
+        self.result_list : list[Node] = []
         self.assertIsNone(self.test_list.head)
         self.assertIsNone(self.test_list.tail)
         self.assertEqual(self.test_list.len(), 0)
@@ -295,9 +298,9 @@ class LinkedListLenTests(unittest.TestCase):
         self.assertEqual(self.test_list.len(), 0)
         del self.test_list
 
-    def save_list_state(self, len : int) -> None:
+    def save_list_state(self, list_len : int) -> None:
         ''' Saves current list length, Head and Tail. '''
-        self.test_list_len : int = len
+        self.test_list_len : int = list_len
         self.test_list_head : Node = self.test_list.head
         self.test_list_tail : Node = self.test_list.tail
 
@@ -370,8 +373,7 @@ class LinkedListInsertTest(unittest.TestCase):
         self.check(2, head_node, node)
 
     def test_large_random_list(self) -> None:
-        ''' Tests large list with random values. Inserts non-existent
-            value in predefined positions. '''
+        ''' Tests large list with random values. Inserts node at random position. '''
         random_insertions_number : int = 1000
         list_len : int = 0
         for _ in range(random_insertions_number):
