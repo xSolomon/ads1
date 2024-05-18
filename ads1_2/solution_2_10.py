@@ -13,7 +13,7 @@ class Node(NodeBase):
         self.value = v
 
 class LinkedListIterator:
-    ''' Implements iterator protocol for LinkedList. '''
+    ''' Implements iterator protocol for LinkedList3. '''
     def __init__(self, linked_list : 'LinkedList3'):
         self.head : NodeBase = linked_list._head
         self.current : NodeBase = self.head.next
@@ -29,7 +29,7 @@ class LinkedListIterator:
         return self.current.prev
 
 class LinkedList3:
-    ''' Represents circular LinkedList with dummy node. '''
+    ''' Represents circular doubly linked list with dummy node. '''
     def __init__(self):
         self._head : NodeBase = NodeBase()
         self._head.next = self._head
