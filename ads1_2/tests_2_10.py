@@ -46,10 +46,10 @@ class LinkedList3DeleteFirstOccuredValTests(unittest.TestCase):
         self.assertIsNone(self.test_list.get_head())
         self.assertIsNone(self.test_list.get_tail())
 
-    @parametrize('repeat_times', range(10))
+    @parametrize('repeat_times', range(100))
     def test_large_random_list_by_deleting_existing_val(self, repeat_times : int) -> None:
         ''' Tests deleting non-existent value from a large list of random values. '''
-        list_len : int = 100
+        list_len : int = 1000
         val : int = 0
         # Position where to_be_deleted value will be inserted:
         # Head.
@@ -119,7 +119,7 @@ class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
     def test_large_list_by_deleting_non_existing_vals(self) -> None:
         ''' Tests deleting non-existent value from a large list of random values. '''
         val_list : list[int] = [-1, 101, 102, 103, 0]
-        test_list_len : int = 100
+        test_list_len : int = 1000
         for _ in range(test_list_len):
             self.test_list.insert(Node(randint(1, 100)), None, True)
         for val in val_list:
@@ -131,7 +131,7 @@ class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
 
     def test_large_singleval_list_by_deleting_existing_val(self) -> None:
         ''' Tests deleting large list with single value. Result must be empty list. '''
-        test_list_len : int = 100
+        test_list_len : int = 10000
         val : int = 5
         for _ in range(test_list_len):
             self.test_list.insert(Node(val), None, True)
@@ -140,7 +140,7 @@ class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
         self.assertIsNone(self.test_list.get_tail())
         self.assertEqual(len(self.test_list), 0)
 
-    @parametrize('repeat_times', range(10))
+    @parametrize('repeat_times', range(100))
     def test_large_random_list_by_deleting_existing_val(self, repeat_times : int) -> None:
         ''' Tests deleting non-existent value from a large list of random values. '''
         list_len : int = 1000
@@ -194,7 +194,7 @@ class LinkedList3CleanTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Tests cleaning large list with random values. '''
-        for _ in range(10):
+        for _ in range(1000):
             self.test_list.insert(Node(randint(1, 100)))
         self.test_list.clean()
         self.check()
@@ -245,7 +245,7 @@ class LinkedList3FindTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Test large list with random values. Tries to find random value. '''
-        for _ in range(10):
+        for _ in range(100):
             with self.subTest():
                 val : int = randint(0, 10)
                 val_node : Node = None
@@ -310,10 +310,10 @@ class LinkedList3FindAllTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Test large list with random values. Tries to find random value. '''
-        for _ in range(10):
+        for _ in range(100):
             with self.subTest():
                 val : int = randint(0, 10)
-                for _ in range(10):
+                for _ in range(1000):
                     node : Node = Node(randint(1, 10))
                     self.test_list.insert(node, None, True)
                     if node.value == val: # Add node to control result list
@@ -363,7 +363,7 @@ class LinkedList3LenTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Tests large list with random values. '''
-        list_len : int = 100
+        list_len : int = 1000
         for _ in range(list_len):
             self.test_list.insert(Node(randint(1, 100)))
         self.save_list_state(list_len)
@@ -504,10 +504,10 @@ class LinkedList3InsertTests(unittest.TestCase):
         self.test_list.insert(head_node)
         self.check(self.test_list.insert(tail_node, self.test_list.get_head(), True))
 
-    @parametrize('repeat_times', range(10))
+    @parametrize('repeat_times', range(100))
     def test_large_random_list(self, repeat_times) -> None:
         ''' Tests large list with random values. Inserts node at random position. '''
-        random_insertions_number : int = 10
+        random_insertions_number : int = 100
         for i in range(random_insertions_number):
             self.head : Node = self.test_list.get_head()
             self.tail : Node = self.test_list.get_tail()
@@ -633,7 +633,7 @@ class LinkedList3GetHeadTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Tests large list with random values. After every insertion, Head must be correct. '''
-        repeat_test_times : int = 10
+        repeat_test_times : int = 100
         list_insertion_number : int = 100
         for _ in range(repeat_test_times):
             for _ in range(list_insertion_number):
@@ -663,7 +663,7 @@ class LinkedList3GetTailTests(unittest.TestCase):
 
     def test_large_random_list(self) -> None:
         ''' Tests large list with random values. After every insertion, Tail must be correct. '''
-        repeat_test_times : int = 10
+        repeat_test_times : int = 100
         list_insertion_number : int = 100
         for _ in range(repeat_test_times):
             for _ in range(list_insertion_number):

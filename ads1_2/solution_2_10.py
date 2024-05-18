@@ -1,4 +1,3 @@
-
 ''' Doubly linked, cycled list with dummy node realisation. '''
 
 class NodeBase:
@@ -96,7 +95,7 @@ class LinkedList3:
             If before = false, insert node after given one.
             If before = true, insert node before given one.
             If insertion node is None and before = false, insert in tail.
-            If insertion node is None and before = true, insert in head.'''
+            If insertion node is None and before = true, insert in head. '''
         if new_node is None: # Nothing to insert.
             return False
         if insertion_node is None and after: # Insert in tail.
