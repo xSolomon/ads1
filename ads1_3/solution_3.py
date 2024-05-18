@@ -7,7 +7,6 @@ class DynArray:
     def __init__(self):
         self.count : int = 0
         self.capacity : int = 16
-        self.shrink_threshold : int = 0
         self.array : ctypes.Array[ctypes.py_object] = self.make_array(self.capacity)
 
     def __len__(self) -> int:
@@ -28,14 +27,12 @@ class DynArray:
     def resize(self, new_capacity : int) -> None:
         ''' Change internal buffer capacity and
             copy exising array into it. '''
+        new_capacity = max(new_capacity, 16)
         new_array = self.make_array(new_capacity)
         for i in range(self.count):
             new_array[i] = self.array[i]
         self.array = new_array
         self.capacity = new_capacity
-        self.shrink_threshold = int(self.capacity / 1.5)
-        if self.shrink_threshold <= 16:
-            self.shrink_threshold = 0
 
     def append(self, itm : ctypes.py_object) -> None:
         ''' Adds new element at the end of array. 
@@ -66,9 +63,8 @@ class DynArray:
         for j in range(i, self.count - 1):
             self.array[j] = self.array[j + 1]
         self.count -= 1
-        if self.count <= self.shrink_threshold: # Need to shrink buffer
-            self.resize(max(self.shrink_threshold, 16))
-
+        if self.count * 2 < self.capacity:
+            self.resize(int(self.capacity / 1.5))
 
 
 

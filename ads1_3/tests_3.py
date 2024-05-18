@@ -155,22 +155,24 @@ class DynArrayDeleteTests(unittest.TestCase):
     def test_full_deletion_of_ary_with_large_buffer(self) -> None:
         ''' Tests full deletion of large array. After certain deletions,
             buffer must shrink by 1.5 times. '''
-        initial_size : int = 3000
-        for _ in range(2):
+        initial_size : int = 300
+        for _ in range(10):
             for i in range(initial_size):
                 self.ary.append(i)
             capacity : int = self.ary.capacity
             next_shrink_count : int = int(self.ary.capacity / 1.5)
-            if next_shrink_count <= 16:
+            if next_shrink_count < 16:
                 next_shrink_count = 0
             for i in range(initial_size):
                 self.ary.delete(0)
-                if len(self.ary) <= next_shrink_count:
+                if len(self.ary) * 2 < capacity:
                     capacity = max(next_shrink_count, 16)
                     next_shrink_count = int(self.ary.capacity / 1.5)
-                if next_shrink_count <= 16:
+                if next_shrink_count < 16:
                     next_shrink_count = 0
                 with self.subTest(i = i, len = self.ary.count):
+                    for j in range(self.ary.count):
+                        self.assertEqual(self.ary[j], j + i + 1)
                     self.assertEqual(self.ary.capacity, capacity)
 
 unittest.main()
