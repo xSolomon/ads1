@@ -1,4 +1,5 @@
 ''' Tests for DynArray insert and delete functions. '''
+
 import unittest
 from random import randint
 from solution_3 import DynArray
