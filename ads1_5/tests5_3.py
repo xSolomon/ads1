@@ -1,8 +1,8 @@
-''' Tests for lesson 5 task 2 solution. '''
+''' Tests for lesson 5 task 3 solution. '''
 
 import unittest
 from random import randint
-from solution5_2 import rotate_queue, Queue
+from solution5_3 import rotate_queue, Queue
 
 class RotateQueueTests(unittest.TestCase):
     ''' Tests for rotate_queue() function. '''

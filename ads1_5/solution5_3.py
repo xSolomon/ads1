@@ -1,4 +1,4 @@
-''' Lesson 5 task 2 solution. '''
+''' Lesson 5 task 3 solution. '''
 
 from solution5_1 import Queue
 
