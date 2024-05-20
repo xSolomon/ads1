@@ -15,7 +15,8 @@ def eval_expression_in_postfix_form(expression_stack : Stack) -> int | None:
         '*': operator.mul,
     }
     token : str | int
-    while token := expression_stack.pop():
+    while expression_stack.size() > 0:
+        token = expression_stack.pop()
         if token in operations:
             op : int = result_stack.pop()
             result_stack.push(operations[token](op, result_stack.pop()))

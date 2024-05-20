@@ -9,6 +9,10 @@ def is_parentheses_sequence_balanced(string_of_parentheses : str) -> bool:
     for c in string_of_parentheses:
         if c == '(':
             stack.push(c)
-        if c == ')' and stack.pop() is None:
+            continue
+        if c == ')' and stack.size() > 0:
+            stack.pop()
+            continue
+        if c == ')' and stack.size() == 0:
             return False
     return stack.size() == 0
