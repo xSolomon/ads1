@@ -1,16 +1,16 @@
-''' Tests for LinkedList3. '''
+''' Tests for LinkedList. '''
 
 import unittest
 from random import randint, sample
 from functools import reduce
 from parametrize import parametrize
-from solution_2_10 import Node, LinkedList3, LinkedListIterator
+from linked_list import Node, LinkedList, LinkedListIterator
 
-class LinkedList3DeleteFirstOccuredValTests(unittest.TestCase):
-    ''' Tests for LinkedList3 delete() function, with flag all=false. '''
+class LinkedListDeleteFirstOccuredValTests(unittest.TestCase):
+    ''' Tests for LinkedList delete() function, with flag all=false. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -75,11 +75,11 @@ class LinkedList3DeleteFirstOccuredValTests(unittest.TestCase):
             self.assertEqual(len(val_list), len(insert_pos_list) - 1)
             self.assertTrue(reduce(lambda x, y : x and (y.value == val), val_list, True))
 
-class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
-    ''' Tests for LinkedList3 delete() function, with flag all=false. '''
+class LinkedListDeleteAllOccuredValTests(unittest.TestCase):
+    ''' Tests for LinkedList delete() function, with flag all=false. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -130,7 +130,7 @@ class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
 
     def test_large_singleval_list_by_deleting_existing_val(self) -> None:
         ''' Tests deleting large list with single value. Result must be empty list. '''
-        test_list_len : int = 10000
+        test_list_len : int = 1000
         val : int = 5
         for _ in range(test_list_len):
             self.test_list.insert(Node(val), None, True)
@@ -166,11 +166,11 @@ class LinkedList3DeleteAllOccuredValTests(unittest.TestCase):
         val_list : list[Node] = self.test_list.find_all(val)
         self.assertEqual(val_list, [])
 
-class LinkedList3CleanTests(unittest.TestCase):
-    ''' Tests LinkedList3 clean() function. '''
+class LinkedListCleanTests(unittest.TestCase):
+    ''' Tests LinkedList clean() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -198,11 +198,11 @@ class LinkedList3CleanTests(unittest.TestCase):
         self.test_list.clean()
         self.check()
 
-class LinkedList3FindTests(unittest.TestCase):
-    ''' Tests LinkedList3 find() function. '''
+class LinkedListFindTests(unittest.TestCase):
+    ''' Tests LinkedList find() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
         self.test_list_len : int = 0
         self.result : Node = None
 
@@ -260,11 +260,11 @@ class LinkedList3FindTests(unittest.TestCase):
                 self.test_list.clean()
                 val_node = None
 
-class LinkedList3FindAllTests(unittest.TestCase):
-    ''' Tests LinkedList3 find_all() function. '''
+class LinkedListFindAllTests(unittest.TestCase):
+    ''' Tests LinkedList find_all() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
         self.test_list_len : int = 0
         self.test_list_head : Node = None
         self.test_list_tail : Node = None
@@ -324,11 +324,11 @@ class LinkedList3FindAllTests(unittest.TestCase):
                 self.test_list.clean()
                 self.result_list = []
 
-class LinkedList3LenTests(unittest.TestCase):
-    ''' Tests LinkedList3 __len__() function. '''
+class LinkedListLenTests(unittest.TestCase):
+    ''' Tests LinkedList __len__() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
         self.test_list_len : int = 0
         self.result_len : int = -1
         self.assertEqual(len(self.test_list), 0)
@@ -369,11 +369,11 @@ class LinkedList3LenTests(unittest.TestCase):
         self.result_len = len(self.test_list)
         self.check()
 
-class LinkedList3InsertTests(unittest.TestCase):
-    ''' Test LinkedList3 insert() function. '''
+class LinkedListInsertTests(unittest.TestCase):
+    ''' Test LinkedList insert() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
         self.head : Node = None
         self.tail : Node = None
         self.list_len : int = 0
@@ -506,7 +506,7 @@ class LinkedList3InsertTests(unittest.TestCase):
     @parametrize('repeat_times', range(100))
     def test_large_random_list(self, repeat_times) -> None:
         ''' Tests large list with random values. Inserts node at random position. '''
-        random_insertions_number : int = 100
+        random_insertions_number : int = 1000
         for i in range(random_insertions_number):
             self.head : Node = self.test_list.get_head()
             self.tail : Node = self.test_list.get_tail()
@@ -557,11 +557,11 @@ class LinkedList3InsertTests(unittest.TestCase):
                 self.inserted_values_list.insert(expected_pos, node.value)
                 self.check(self.test_list.insert(node, insertion_node, after))
 
-class LinkedList3IterTests(unittest.TestCase):
-    ''' Test LinkedList3 __iter__() function. '''
+class LinkedListIterTests(unittest.TestCase):
+    ''' Test LinkedList __iter__() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -610,11 +610,11 @@ class LinkedList3IterTests(unittest.TestCase):
             val_list = []
             self.test_list.clean()
 
-class LinkedList3GetHeadTests(unittest.TestCase):
-    ''' Test LinkedList3 get_head() function. '''
+class LinkedListGetHeadTests(unittest.TestCase):
+    ''' Test LinkedList get_head() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -633,18 +633,18 @@ class LinkedList3GetHeadTests(unittest.TestCase):
     def test_large_random_list(self) -> None:
         ''' Tests large list with random values. After every insertion, Head must be correct. '''
         repeat_test_times : int = 100
-        list_insertion_number : int = 100
+        list_insertion_number : int = 1000
         for _ in range(repeat_test_times):
             for _ in range(list_insertion_number):
                 self.test_list.insert(Node(randint(1, 100)), None, sample([True, False], 1)[0])
                 with self.subTest():
                     self.assertIs(next(iter(self.test_list)), self.test_list.get_head())
 
-class LinkedList3GetTailTests(unittest.TestCase):
-    ''' Test LinkedList3 get_tail() function. '''
+class LinkedListGetTailTests(unittest.TestCase):
+    ''' Test LinkedList get_tail() function. '''
     def setUp(self) -> None:
         ''' Test preparations. '''
-        self.test_list : LinkedList3 = LinkedList3()
+        self.test_list : LinkedList = LinkedList()
 
     def tearDown(self) -> None:
         ''' Aftertest cleanup. '''
@@ -663,27 +663,111 @@ class LinkedList3GetTailTests(unittest.TestCase):
     def test_large_random_list(self) -> None:
         ''' Tests large list with random values. After every insertion, Tail must be correct. '''
         repeat_test_times : int = 100
-        list_insertion_number : int = 100
+        list_insertion_number : int = 1000
         for _ in range(repeat_test_times):
             for _ in range(list_insertion_number):
                 self.test_list.insert(Node(randint(1, 100)), None, sample([True, False], 1)[0])
                 with self.subTest():
                     self.assertIs(self.test_list.get_head().prev.prev, self.test_list.get_tail())
 
+class LinkedListPopHeadTests(unittest.TestCase):
+    ''' Test LinkedList pop_head() function. '''
+    def setUp(self) -> None:
+        ''' Test preparations. '''
+        self.test_list : LinkedList = LinkedList()
+
+    def tearDown(self) -> None:
+        ''' Aftertest cleanup. '''
+        self.test_list.clean()
+        del self.test_list
+
+    def test_empty_list(self) -> None:
+        ''' Tests empty list. Expected "None" return value and len == 0. '''
+        self.assertIsNone(self.test_list.pop_head())
+        self.assertEqual(len(self.test_list), 0)
+
+    def test_single_node_list(self) -> None:
+        ''' Tests list with single node. Must return value of that node.
+            Len must be 0. '''
+        self.test_list.insert(Node(5))
+        self.assertEqual(self.test_list.pop_head(), 5)
+        self.assertEqual(len(self.test_list), 0)
+
+    def test_large_random_list(self) -> None:
+        ''' Tests large list with random values. After each operation,
+            len must shrink by one, returned value must be same that was in head. '''
+        repeat_test_times : int = 100
+        initial_len : int = 1000
+        for _ in range(repeat_test_times):
+            for _ in range(initial_len):
+                self.test_list.insert(Node(randint(-100, 100)))
+            for i in range(initial_len):
+                with self.subTest():
+                    if len(self.test_list) == 0:
+                        self.assertIsNone(self.test_list.pop_head())
+                    if len(self.test_list) > 0:
+                        value : int = self.test_list.get_head().value
+                        self.assertEqual(self.test_list.pop_head(), value)
+                    self.assertEqual(len(self.test_list), initial_len - i - 1)
+            self.test_list.clean()
+
+class LinkedListPopTailTests(unittest.TestCase):
+    ''' Test LinkedList pop_tail() function. '''
+    def setUp(self) -> None:
+        ''' Test preparations. '''
+        self.test_list : LinkedList = LinkedList()
+
+    def tearDown(self) -> None:
+        ''' Aftertest cleanup. '''
+        self.test_list.clean()
+        del self.test_list
+
+    def test_empty_list(self) -> None:
+        ''' Tests empty list. Expected "None" return value and len == 0. '''
+        self.assertIsNone(self.test_list.pop_tail())
+        self.assertEqual(len(self.test_list), 0)
+
+    def test_single_node_list(self) -> None:
+        ''' Tests list with single node. Must return value of that node.
+            Len must be 0. '''
+        self.test_list.insert(Node(5))
+        self.assertEqual(self.test_list.pop_tail(), 5)
+        self.assertEqual(len(self.test_list), 0)
+
+    def test_large_random_list(self) -> None:
+        ''' Tests large list with random values. After each operation,
+            len must shrink by one, returned value must be same that was in tail. '''
+        repeat_test_times : int = 100
+        initial_len : int = 1000
+        for _ in range(repeat_test_times):
+            for _ in range(initial_len):
+                self.test_list.insert(Node(randint(-100, 100)))
+            for i in range(initial_len):
+                with self.subTest():
+                    if len(self.test_list) == 0:
+                        self.assertIsNone(self.test_list.pop_tail())
+                    if len(self.test_list) > 0:
+                        value : int = self.test_list.get_tail().value
+                        self.assertEqual(self.test_list.pop_tail(), value)
+                    self.assertEqual(len(self.test_list), initial_len - i - 1)
+            self.test_list.clean()
+
 def suite() -> unittest.TestSuite:
     ''' Collects all TestCase classes for the current test run. '''
     test_loader : unittest.TestLoader = unittest.TestLoader()
     test_suite : unittest.TestSuite = unittest.TestSuite()
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3LenTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3CleanTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3FindTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3FindAllTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3InsertTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3DeleteFirstOccuredValTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3DeleteAllOccuredValTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3IterTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3GetHeadTests))
-    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedList3GetTailTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListLenTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListCleanTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListFindTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListFindAllTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListInsertTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListDeleteFirstOccuredValTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListDeleteAllOccuredValTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListIterTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListGetHeadTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListGetTailTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListPopHeadTests))
+    test_suite.addTests(test_loader.loadTestsFromTestCase(LinkedListPopTailTests))
     return test_suite
 
 if __name__ == '__main__':

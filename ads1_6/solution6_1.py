@@ -1,4 +1,4 @@
-''' Doubly linked, cycled list with dummy node realisation. '''
+''' Lesson 6 task 1 solution. '''
 
 class NodeBase:
     ''' Base Node, contains no data. '''
@@ -67,28 +67,23 @@ class LinkedList:
             if current is self._head:
                 break
 
-    @invariant
     def __iter__(self) -> LinkedListIterator:
         ''' Returns iterator, allowing to traverse list. '''
         return LinkedListIterator(self)
 
-    @invariant
     def __len__(self) -> int:
         ''' Get current length of the list. '''
         list_len : int = self._len
         return list_len
 
-    @invariant
     def get_head(self) -> Node | Node:
         ''' Returns current head. '''
         return self._head.next if self._head.next is not self._head else None
 
-    @invariant
     def get_tail(self) -> Node | Node:
         ''' Returns current head. '''
         return self._head.prev if self._head.prev is not self._head else None
 
-    @invariant
     def insert(self, new_node : Node,  insertion_node : NodeBase = None,
         after : bool = False) -> bool:
         ''' Inserts new node in list.
@@ -125,7 +120,6 @@ class LinkedList:
         self._len += 1
         return True
 
-    @invariant
     def delete(self, val, delete_all : bool = False) -> None:
         ''' If delete_all = false, deletes first occurence of val in list.
             If delete_all = true, deletes all occurences of val in list. '''
@@ -149,7 +143,6 @@ class LinkedList:
                 continue # Cause node was deleted, we don't advance.
             current = current.next
 
-    @invariant
     def pop_head(self):
         ''' Removes head and returns its value. '''
         if len(self) == 0: # List is empty.
@@ -162,7 +155,6 @@ class LinkedList:
         self._len -= 1
         return value
 
-    @invariant
     def pop_tail(self):
         ''' Removes tail and returns its value. '''
         if len(self) == 0: # List is empty.
@@ -175,7 +167,6 @@ class LinkedList:
         self._len -= 1
         return value
 
-    @invariant
     def find(self, val) -> Node | None:
         ''' Finds first occurence of val in list and returns its node.
             If no node with this key, returns None. '''
@@ -185,7 +176,6 @@ class LinkedList:
                 return current
         return None
 
-    @invariant
     def find_all(self, val) -> list[Node]:
         ''' Finds all occurence of key in LinkedList.
             Returns python list of nodes with value = val. '''
@@ -196,7 +186,6 @@ class LinkedList:
                 result.append(current)
         return result
 
-    @invariant
     def clean(self) -> None:
         ''' Delete every node in the list. '''
         current : NodeBase = self._head
@@ -206,9 +195,49 @@ class LinkedList:
             current.next.prev = current
             self._len -= 1
 
-    @invariant
     def print_all_nodes(self) -> None:
         ''' Print list to the console. '''
         for node in self:
             print(node.value, end = ' <-> ')
         print('End of list.')
+
+class Deque:
+    ''' Deque realisation, using doubly linked circular list with dummy node. '''
+    def __init__(self):
+        self.deque : LinkedList = LinkedList()
+
+    def addFront(self, item) -> None:
+        ''' Add new item in deque head. '''
+        self.deque.insert(Node(item), None)
+
+    def addTail(self, item) -> None:
+        ''' Add new item in deque tail. '''
+        self.deque.insert(Node(item), None, True)
+
+    def removeFront(self):
+        ''' Remove and return current deque head. '''
+        return self.deque.pop_head()
+
+    def removeTail(self):
+        ''' Remove and return current deque tail. '''
+        return self.deque.pop_tail()
+
+    def peekFront(self):
+        ''' Returns current deque head without removing it. '''
+        return None if len(self.deque) == 0 else self.deque.get_head().value
+
+    def peekTail(self):
+        ''' Returns current deque tail without removing it. '''
+        return None if len(self.deque) == 0 else self.deque.get_tail().value
+
+    def size(self) -> int:
+        ''' Return current deque length. '''
+        return len(self.deque)
+
+
+
+
+
+
+
+
