@@ -2,7 +2,7 @@
 
 class HashTable:
     ''' HashTable realistation. '''
-    def __init__(self, sz, stp):
+    def __init__(self, sz : int, stp : int):
         self.size : int = sz
         self.step : int = stp
         self.slots : list[str] = [None] * self.size
